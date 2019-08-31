@@ -112,7 +112,6 @@ void loop() {
   }
 
   /* Saida de dados */
-  
   // Printa os valores
   Serial.write( (char*) dosagem );
   Serial.write( (char*) remedio );

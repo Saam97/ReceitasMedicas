@@ -11,11 +11,11 @@ void setup() {
   Serial.begin(9600);        // Initialize serial communications with the PC
   SPI.begin();               // Init SPI bus
   mfrc522.PCD_Init();        // Init MFRC522 card
-  Serial.println("\tLeitura dos dados");
-  Serial.println("Mantenha o cartao em cima do leitor para realizar o procedimento\n");
 
 }
+
 void loop() {
+
 
   // Prepare key - all keys are set to FFFFFFFFFFFFh at chip delivery from the factory.
   MFRC522::MIFARE_Key key;
@@ -37,16 +37,13 @@ void loop() {
   }
 
   /* Escrita */
-  Serial.println(F("\n---------Bem vindo ao Vita APP!!--------- \n"));
+
+
   Serial.print(F( "CARTAO ID:"));    //Dump UID
   for (byte i = 0; i < mfrc522.uid.size; i++) {
     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
     Serial.print(mfrc522.uid.uidByte[i], HEX);
   }
-  Serial.println("");
-  //Serial.print(F(" PICC type: "));   // Dump PICC type
-  //MFRC522::PICC_Type piccType = mfrc522.PICC_GetType(mfrc522.uid.sak);
-  //Serial.println(mfrc522.PICC_GetTypeName(piccType));
 
   byte buffer[34];
 
@@ -57,30 +54,26 @@ void loop() {
   for (byte i = len; i < 30; i++) buffer[i] = ' ';     // pad with spaces
 
   block = 1;
-  //Serial.println(F("Authenticating using key A..."));
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("\nProcesso falhou, tente novamente! "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
+
   else Serial.println(F("Processo validado! "));
 
   // Write block
   status = mfrc522.MIFARE_Write(block, buffer, 16);
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou!! Tente novamente "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
-  else //Serial.println(F("Processo 2 validado "));
 
-    block = 2;
+  block = 2;
   //Serial.println(F("Authenticating using key A..."));
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou, tente novamente! "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
 
@@ -88,7 +81,6 @@ void loop() {
   status = mfrc522.MIFARE_Write(block, &buffer[16], 16);
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou, tente novamente! "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
   else //Serial.println(F("Processo validado "));
@@ -103,7 +95,6 @@ void loop() {
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou, tente novamente!"));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
 
@@ -111,17 +102,14 @@ void loop() {
   status = mfrc522.MIFARE_Write(block, buffer, 16);
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou, tente novamente! "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
-  else //Serial.println(F("Processo validado "));
-
+  else
     block = 5;
-  //Serial.println(F("Authenticating using key A..."));
+
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou, tente novamente! "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
 
@@ -129,9 +117,13 @@ void loop() {
   status = mfrc522.MIFARE_Write(block, &buffer[16], 16);
   if (status != MFRC522::STATUS_OK) {
     Serial.print(F("Processo falhou, tente novamente! "));
-    //Serial.println(mfrc522.GetStatusCodeName(status));
     return;
   }
   else Serial.println(F("\n---------Processo validado, Retire seu cartao---------\n "));
-  Serial.println(" ");
+
+  delay(1000);                //change value if you want to read cards faster
+  mfrc522.PICC_HaltA();       // Halt PICC
+  mfrc522.PCD_StopCrypto1();  // Stop encryption on PCD
+
+
 }

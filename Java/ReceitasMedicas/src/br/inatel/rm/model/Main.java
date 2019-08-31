@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         
+        // Look and feel
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
