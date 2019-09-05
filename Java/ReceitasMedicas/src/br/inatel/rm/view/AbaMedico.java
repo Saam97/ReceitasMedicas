@@ -15,10 +15,12 @@ import javax.swing.JOptionPane;
 public class AbaMedico extends javax.swing.JFrame {
 
     private ArduinoSerial as = new ArduinoSerial("COM3");
-    
+
     public AbaMedico() {
         initComponents();
         as.initialize();
+        dadosPreenchidos();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -47,6 +49,7 @@ public class AbaMedico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Receita Médica");
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -60,7 +63,7 @@ public class AbaMedico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_title, javax.swing.GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -70,6 +73,8 @@ public class AbaMedico extends javax.swing.JFrame {
                 .addComponent(lbl_title, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 1004, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -128,11 +133,11 @@ public class AbaMedico extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_gravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(txt_nomeRemedio)
-                            .addComponent(txt_dosagem, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+                            .addComponent(txt_nomeRemedio, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_dosagem, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -165,36 +170,18 @@ public class AbaMedico extends javax.swing.JFrame {
                             .addComponent(combo_tarja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_dosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combo_dosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(combo_dosagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btn_voltar)
                         .addComponent(btn_salvar)))
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 119, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -265,28 +252,57 @@ public class AbaMedico extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void voltar() {
-        new Principal().setVisible(true);
+        new Menu().setVisible(true);
         this.dispose();
     }
 
     private void salvarDados() {
-        // Pega os dados inseridos
-        String nomeRemedio = txt_nomeRemedio.getText() + "#";
-        String dosagem = txt_dosagem.getText() + "#";
+        // Variáveis auxiliares
+        String nomeRemedio = null;
+        String dosagem = null;
         
+        // Se os dados não forem vazios
+        if ( !txt_dosagem.getText().equalsIgnoreCase("") 
+                && !txt_nomeRemedio.getText().equalsIgnoreCase("")) {
+            // Pega os dados inseridos
+            nomeRemedio = txt_nomeRemedio.getText() + "#";
+            dosagem = txt_dosagem.getText() + "#";
+        }
+
         // Envia os dados para o Arduino
         as.send(nomeRemedio);
         as.sleep(250); // Delay pra não bugar
         as.send(dosagem);
         as.sleep(250);
-        
+
         // Fecha a comunicação
-        //as.close();
-        
+        as.close();
         // Feedback
         JOptionPane.showMessageDialog(this, "Dados Salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        
+
         // Volta
         //voltar();
+    }
+
+    /**
+     * Thread para verificar se os dados foram corretamente preenchidos
+     */
+    private void dadosPreenchidos() {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    if (txt_dosagem.getText() == null
+                            || txt_nomeRemedio.getText() == null
+                            || txt_dosagem.getText().equalsIgnoreCase("")
+                            || txt_nomeRemedio.getText().equalsIgnoreCase("")) {
+                        btn_salvar.setEnabled(false);
+                    } else {
+                        btn_salvar.setEnabled(true);
+                    }
+                }
+            }
+        };
+        t.start();
     }
 }

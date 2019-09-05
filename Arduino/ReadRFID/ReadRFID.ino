@@ -3,13 +3,11 @@
 
 #define RST_PIN         9           // Configurable, see typical pin layout above
 #define SS_PIN          10          // Configurable, see typical pin layout above
-#define LED             13          // LED
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 
 void setup() {
 
-  pinMode(LED, OUTPUT);      // LED auxiliar
   Serial.begin(9600);        // Initialize serial communications with the PC
   SPI.begin();               // Init SPI bus
   mfrc522.PCD_Init();        // Init MFRC522 card
@@ -38,7 +36,6 @@ void loop() {
   }
 
   /** Leitura dos dados **/
-  digitalWrite(LED, HIGH);      // Quando encontrar o cartão, acende o led
 
   // Variaveis auxiliares
   byte buffer1[18];
@@ -115,9 +112,6 @@ void loop() {
   // Printa os valores
   Serial.write( (char*) dosagem );
   Serial.write( (char*) remedio );
-  
-  // Desliga o LED
-  digitalWrite(LED, LOW);
 
   delay(1000);                //change value if you want to read cards faster
   mfrc522.PICC_HaltA();       // Halt PICC

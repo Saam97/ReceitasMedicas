@@ -1,6 +1,6 @@
 package br.inatel.rm.model;
 
-import br.inatel.rm.view.Principal;
+import br.inatel.rm.view.*;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Main {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        new Principal().setVisible(true);
+        new LeituraCartao().setVisible(true);
     }
 
 }
