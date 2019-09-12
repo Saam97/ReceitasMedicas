@@ -28,7 +28,7 @@ public class Main {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        new LeituraCartao().setVisible(true);
+        new Menu().setVisible(true);
     }
 
 }

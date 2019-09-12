@@ -7,11 +7,10 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 
 void setup() {
-
   Serial.begin(9600);        // Initialize serial communications with the PC
   SPI.begin();               // Init SPI bus
   mfrc522.PCD_Init();        // Init MFRC522 card
-
+  Serial.println("Mantenha o cartao em cima do leitor para realizar o procedimento");
 }
 
 void loop() {
@@ -35,83 +34,61 @@ void loop() {
     return;
   }
 
-  /** Leitura dos dados **/
-
-  // Variaveis auxiliares
+  /* Leitura de Dados */
+  // ID do Cartão
+  for (byte i = 0; i < mfrc522.uid.size; i++) {
+    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+    Serial.print(mfrc522.uid.uidByte[i], HEX);
+  }
+  
   byte buffer1[18];
+
   block = 4;
   len = 18;
 
-  /* DOSAGEM DO REMÉDIO */
-
-  /* Validação de leitura */
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 4, &key, &(mfrc522.uid)); //line 834 of MFRC522.cpp file
   if (status != MFRC522::STATUS_OK) {
-    //Serial.println(F("Procedimento falhou, tente novamente!! \n"));
-    Serial.write("Procedimento falhou, tente novamente !\n");
+    Serial.write("Falha!");
     return;
   }
 
-  /* Validação de leitura */
   status = mfrc522.MIFARE_Read(block, buffer1, &len);
   if (status != MFRC522::STATUS_OK) {
-    //Serial.println(F("Falha na leitura, tente novamente!! \n"));
-    Serial.write("Falha na leitura, tente novamente ! \n");
+    Serial.write("Falha!");
     return;
   }
 
-  int tam = 0;
-  /* Descobrindo o tamanho da palavra da Dosagem */
-  for (uint8_t i = 0; i < 16; i++) {
-    if (buffer1[i] != 32) {
-      tam++;
+  // Printando a dosagem
+  for (uint8_t i = 0; i < 16; i++)
+  {
+    if (buffer1[i] != 32)
+    {
+      Serial.write(buffer1[i]);
     }
   }
 
-  // Criando a variável
-  byte dosagem[tam];
-  
-  // Atribuindo somente os valores necessários
-  for ( uint8_t i = 0; i < tam; i++) {
-    dosagem[i] = buffer1[i];
-  }
-
-  /* NOME DO REMÉDIO */
-
-  // Variáveis auxiliares
   byte buffer2[18];
   block = 1;
 
-  /* Validação de leitura */
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 1, &key, &(mfrc522.uid)); //line 834
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo invalido! "));
+    Serial.write("Falha!");
     return;
   }
 
-  /* Validação de leitura */
   status = mfrc522.MIFARE_Read(block, buffer2, &len);
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Falha de leitura!! "));
+    Serial.write("Falha!");
     return;
   }
 
-  int tam2 = 0;
-  /* Tamanho da variável de nome do remédio */
+  // Printando o nome do remédio
+  Serial.println();
   for (uint8_t i = 0; i < 16; i++) {
-    tam2++;
+    Serial.write(buffer2[i] );
   }
 
-  /* Atribuindo valor a variável com o nome do remédio */
-  byte remedio[tam2];
-  for ( uint8_t i = 0; i <  tam2; i++) {
-    remedio[i] = buffer2[i];
-  }
-
-  /* Saida de dados */
-  // Printa os valores
-  Serial.write( (char*) dosagem );
-  Serial.write( (char*) remedio );
+  Serial.println();
 
   delay(1000);                //change value if you want to read cards faster
   mfrc522.PICC_HaltA();       // Halt PICC

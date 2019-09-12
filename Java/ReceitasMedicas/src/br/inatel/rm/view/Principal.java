@@ -205,7 +205,8 @@ public class Principal extends javax.swing.JFrame {
 
                 while (true) {
                     lbl_leitura.setText(arduino.read());
-
+                    System.out.println( arduino.read() );
+                    
                     if ( arduino.read() != null ) {
                         txt_area.setText( arduino.read() + "\n");
                     }

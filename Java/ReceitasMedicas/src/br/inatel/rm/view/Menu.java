@@ -16,6 +16,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -85,22 +86,21 @@ public class Menu extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
-        lbl_fundo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Samuel\\Downloads\\cruz_hospital.png")); // NOI18N
         lbl_fundo.setText(" ");
-        getContentPane().add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 220, 230));
+        getContentPane().add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Consultorio
-        new AbaMedico().setVisible(true);
+        new EscritaCartao().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Farmacia
-        new AbaFarmacia().setVisible(true);
+        new LeituraCartao().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -7,11 +7,10 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 
 void setup() {
-
   Serial.begin(9600);        // Initialize serial communications with the PC
   SPI.begin();               // Init SPI bus
   mfrc522.PCD_Init();        // Init MFRC522 card
-
+  Serial.println("Mantenha o cartao em cima do leitor para realizar o procedimento\n");
 }
 
 void loop() {
@@ -35,94 +34,91 @@ void loop() {
     return;
   }
 
-  /* Escrita */
-
-
-  Serial.print(F( "CARTAO ID:"));    //Dump UID
+  /* Gravar dados */
+  /*
+  // ID do Cartão
   for (byte i = 0; i < mfrc522.uid.size; i++) {
     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
     Serial.print(mfrc522.uid.uidByte[i], HEX);
   }
+  Serial.println();
+  */
 
+  Serial.println("Card found!");
+  
   byte buffer[34];
 
   Serial.setTimeout(20000L) ;     // wait until 20 seconds for input from serial
   // Ask personal data: remedio
   Serial.println(F("Nome do remedio, terminando com #"));
   len = Serial.readBytesUntil('#', (char *) buffer, 30) ; // read remedio from serial
-  for (byte i = len; i < 30; i++) buffer[i] = ' ';     // pad with spaces
+  for (byte i = len; i < 30; i++) buffer[i] = ' ';        // pad with spaces
 
   block = 1;
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("\nProcesso falhou, tente novamente! "));
-    return;
-  }
-
-  else Serial.println(F("Processo validado! "));
-
-  // Write block
-  status = mfrc522.MIFARE_Write(block, buffer, 16);
-  if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou!! Tente novamente "));
-    return;
-  }
-
-  block = 2;
-  //Serial.println(F("Authenticating using key A..."));
-  status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
-  if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou, tente novamente! "));
-    return;
-  }
-
-  // Write block
-  status = mfrc522.MIFARE_Write(block, &buffer[16], 16);
-  if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou, tente novamente! "));
-    return;
-  }
-  else //Serial.println(F("Processo validado "));
-
-    // Ask personal data: First name
-    Serial.println(F("Dosagem, terminando com #"));
-  len = Serial.readBytesUntil('#', (char *) buffer, 20) ; // read first name from serial
-  for (byte i = len; i < 20; i++) buffer[i] = ' ';     // pad with spaces
-
-  block = 4;
-  //Serial.println(F("Authenticating using key A..."));
-  status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
-  if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou, tente novamente!"));
+    Serial.write("Falha!");
     return;
   }
 
   // Write block
   status = mfrc522.MIFARE_Write(block, buffer, 16);
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou, tente novamente! "));
+    Serial.write("Falha!");
     return;
   }
   else
-    block = 5;
 
+    block = 2;
   status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou, tente novamente! "));
+    Serial.write("Falha!");
     return;
   }
 
   // Write block
   status = mfrc522.MIFARE_Write(block, &buffer[16], 16);
   if (status != MFRC522::STATUS_OK) {
-    Serial.print(F("Processo falhou, tente novamente! "));
+    Serial.write("Falha!");
     return;
   }
-  else Serial.println(F("\n---------Processo validado, Retire seu cartao---------\n "));
+  else
+    Serial.println(F("Dosagem, terminando com #"));
+  len = Serial.readBytesUntil('#', (char *) buffer, 20) ; // read first name from serial
+  for (byte i = len; i < 20; i++) buffer[i] = ' ';        // pad with spaces
+
+  block = 4;
+  status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
+  if (status != MFRC522::STATUS_OK) {
+    Serial.write("Falha!");
+    return;
+  }
+
+  // Write block
+  status = mfrc522.MIFARE_Write(block, buffer, 16);
+  if (status != MFRC522::STATUS_OK) {
+    Serial.write("Falha!");
+    return;
+  }
+  else
+
+    block = 5;
+  status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, block, &key, &(mfrc522.uid));
+  if (status != MFRC522::STATUS_OK) {
+    Serial.write("Falha!");
+    return;
+  }
+
+  // Write block
+  status = mfrc522.MIFARE_Write(block, &buffer[16], 16);
+  if (status != MFRC522::STATUS_OK) {
+    Serial.write("Falha!");
+    return;
+  }
+  Serial.println("\nDados salvos!");
 
   delay(1000);                //change value if you want to read cards faster
   mfrc522.PICC_HaltA();       // Halt PICC
   mfrc522.PCD_StopCrypto1();  // Stop encryption on PCD
-
 
 }
