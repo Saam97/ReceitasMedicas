@@ -1,32 +1,44 @@
 package br.inatel.rm.view;
 
 import br.inatel.rm.controller.ArduinoSerial;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+/**
+ * Classe que realiza a escrita no cartão RFID (Tela do Consultório).
+ *
+ * @author Samuel
+ * @version 1.0
+ */
 public class EscritaCartao extends javax.swing.JFrame {
 
+    /**
+     * Variável para comunicação com o Arduino.
+     */
     private final ArduinoSerial as = new ArduinoSerial("COM3");
 
     public EscritaCartao() {
+        /* Inicializa os componentes da tela */
         initComponents();
+        /* Deixa a tela centralizada */
         setLocationRelativeTo(null);
-        //dadosPreenchidos();
+        /* Inicializa a Thread para verificação dos dados preenchidos */
+        threadDadosPreenchidos();
+        /* Inicializa a Thread para mostrar quantas vezes ao dia o remédio deve ser tomado */
         threadNumeroVezesAoDia();
+        /* Inicializa o Arduino */
         as.initialize();
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_icon = new javax.swing.JLabel();
+        lbl_titulo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lbl_id = new javax.swing.JLabel();
         lbl_sujo = new javax.swing.JLabel();
-        btn_refresh = new javax.swing.JButton();
+        btn_voltar = new javax.swing.JButton();
         txt_nomeRemedio = new javax.swing.JTextField();
         btn_salvar = new javax.swing.JButton();
         combo_rem = new javax.swing.JComboBox<>();
@@ -35,52 +47,47 @@ public class EscritaCartao extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lbl_qtdDias = new javax.swing.JLabel();
+        lbl_fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consultorio");
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consultório");
+        lbl_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_clinic.png"))); // NOI18N
+        jPanel1.add(lbl_icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 60, 60));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lbl_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_titulo.setText("Consultório");
+        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 8, 620, 60));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 24))); // NOI18N
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, 620, 70));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Cartão", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
+        jPanel2.setOpaque(false);
 
         lbl_id.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lbl_id.setText(" ");
-        lbl_id.setBorder(javax.swing.BorderFactory.createTitledBorder("ID do Cartão"));
+        lbl_id.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ID do Cartão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         lbl_sujo.setText(" ");
 
-        btn_refresh.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btn_refresh.setText("Refresh");
-        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+        btn_voltar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn_voltar.setText("Voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_refreshActionPerformed(evt);
+                btn_voltarActionPerformed(evt);
             }
         });
 
         txt_nomeRemedio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txt_nomeRemedio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Remédio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        txt_nomeRemedio.setOpaque(false);
         txt_nomeRemedio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nomeRemedioActionPerformed(evt);
@@ -101,6 +108,7 @@ public class EscritaCartao extends javax.swing.JFrame {
 
         spn_dias.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         spn_dias.setModel(new javax.swing.SpinnerNumberModel(0, 0, 7, 1));
+        spn_dias.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Tomar o remédio a cada");
@@ -111,7 +119,7 @@ public class EscritaCartao extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("dias");
 
-        lbl_qtdDias.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_qtdDias.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         lbl_qtdDias.setText(" ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -120,87 +128,77 @@ public class EscritaCartao extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbl_id)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
-                        .addComponent(btn_refresh)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_salvar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_sujo, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_nomeRemedio, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spn_dias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4))
+                    .addComponent(txt_nomeRemedio, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(combo_rem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_qtdDias)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_qtdDias))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(4, 4, 4)
+                        .addComponent(spn_dias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lbl_id)
+                        .addGap(393, 393, 393)
+                        .addComponent(btn_voltar)
+                        .addGap(22, 22, 22)
+                        .addComponent(btn_salvar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(593, 593, 593)
+                        .addComponent(lbl_sujo, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(txt_nomeRemedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(combo_rem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_qtdDias))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(combo_rem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_qtdDias))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2)))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(spn_dias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(140, 140, 140)
-                .addComponent(lbl_sujo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_refresh)
-                    .addComponent(btn_salvar))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))))
+                .addGap(95, 95, 95)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_id)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_voltar)
+                            .addComponent(btn_salvar))))
+                .addComponent(lbl_sujo))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 620, 320));
+
+        lbl_fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/fundo.png"))); // NOI18N
+        getContentPane().add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
-        // Refresh
-        this.dispose();
-    }//GEN-LAST:event_btn_refreshActionPerformed
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        // Voltar
+        voltar();
+    }//GEN-LAST:event_btn_voltarActionPerformed
 
     private void txt_nomeRemedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nomeRemedioActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt_nomeRemedioActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
@@ -209,8 +207,6 @@ public class EscritaCartao extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     public static void main(String args[]) {
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EscritaCartao().setVisible(true);
@@ -219,26 +215,30 @@ public class EscritaCartao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_refresh;
     private javax.swing.JButton btn_salvar;
+    private javax.swing.JButton btn_voltar;
     private javax.swing.JComboBox<String> combo_rem;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_fundo;
+    private javax.swing.JLabel lbl_icon;
     private javax.swing.JLabel lbl_id;
     private javax.swing.JLabel lbl_qtdDias;
     private javax.swing.JLabel lbl_sujo;
+    private javax.swing.JLabel lbl_titulo;
     private javax.swing.JSpinner spn_dias;
     private javax.swing.JTextField txt_nomeRemedio;
     // End of variables declaration//GEN-END:variables
 
+    // <editor-fold defaultstate="collapsed" desc=" *** Métodos Criados *** ">
+    
     /**
      * Thread para verificar se os dados foram corretamente preenchidos
      */
-    private void dadosPreenchidos() {
+    private void threadDadosPreenchidos() {
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -260,10 +260,14 @@ public class EscritaCartao extends javax.swing.JFrame {
         t.start();
     }
 
-    private void threadNumeroVezesAoDia(){
+    /**
+     * Thread para verificar de acordo com a opção escolhida, mostrar o número
+     * de vezes ao dia que o paciente deve tomar o remédio.
+     */
+    private void threadNumeroVezesAoDia() {
         Thread t = new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 while (true) {
                     switch (combo_rem.getSelectedIndex()) {
                         case 0:
@@ -283,6 +287,7 @@ public class EscritaCartao extends javax.swing.JFrame {
                             lbl_qtdDias.setText("(4 vezes por dia)");
                             break;
                         default:
+                            // Nenhum indice selecionado
                             lbl_qtdDias.setText("");
                     }
                 }
@@ -290,34 +295,71 @@ public class EscritaCartao extends javax.swing.JFrame {
         };
         t.start();
     }
+
+    /**
+     * Método para armazenar os dados no cartão, aplicando uma máscara no nome
+     * do remédio e dosagem.
+     */
     private void salvarDados() {
         // Variáveis auxiliares
         String nomeRemedio = null;
         String dosagem = null;
 
-        // Se os dados não forem vazios
+        // Se o nome do remédio não estiver vazio
         if (!txt_nomeRemedio.getText().equalsIgnoreCase("")) {
-            // Pega os dados inseridos e concatena com #
+            // Pega os dados inseridos e concatena com # (Mandatório no Código do Arduino)
             nomeRemedio = "!" + txt_nomeRemedio.getText() + "#";
+        } else {
+            // Senão exibe uma mensagem de erro e retorna
+            JOptionPane.showMessageDialog(this, "Nome do remédio não pode ser vazio !", "Erro!",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Se o indice da dosagem estiver no intervalo especificado
+        if (combo_rem.getSelectedIndex() >= 0 && combo_rem.getSelectedIndex() < 4) {
+            // Pega os dados inseridos e concatena com # (Mandatório no Código do Arduino)
+            // E aplica uma máscara para armazenar no cartao
+            dosagem = "_" + combo_rem.getSelectedItem().toString()
+                    + "/" + combo_rem.getSelectedItem().toString() + "x"
+                    + spn_dias.getValue().toString() + "#";
+        } else {
+            // Senão exibe uma mensagem de erro e retorna
+            JOptionPane.showMessageDialog(this, "Selecione uma dosagem !", "Erro!",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
-        dosagem = "_" + combo_rem.getSelectedItem().toString() + 
-                "/" + combo_rem.getSelectedItem().toString() + "x"
-                + spn_dias.getValue().toString() + "#";
-        
-        System.out.println("dosagem = " + dosagem);
-        System.out.println("nomeRemedio = " + nomeRemedio);
+        // Se o número de dias estiver no intervalo válido
+        if ( Integer.parseInt(spn_dias.getValue().toString())!= 0 ) {
+            // Salva os dados
+            System.out.println("dosagem = " + dosagem);
+            System.out.println("nomeRemedio = " + nomeRemedio);
 
-        // Envia os dados para o Arduino
-        as.send(nomeRemedio);
-        as.sleep(250); // Delay pra não bugar
-        as.send(dosagem);
-        as.sleep(250);
+            // Envia os dados para o Arduino, com um delay pra não bugar
+            as.send(nomeRemedio);
+            as.sleep(250);
+            as.send(dosagem);
+            as.sleep(250);
 
-        // Fecha a comunicação
-        as.close();
-        // Feedback
-        JOptionPane.showMessageDialog(this, "Dados Salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            // Fecha a comunicação
+            as.close();
 
+            // Exibe uma mensagem de sucesso
+            JOptionPane.showMessageDialog(this, "Dados Salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Senão exibe uma mensagem de erro e retorna
+            JOptionPane.showMessageDialog(this, "Selecione uma quantidade de dias Válida !", "Erro!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
+    
+    /**
+     * Volta a tela de menu.
+     */
+    public void voltar() {
+        new Menu().setVisible(true);
+        this.dispose();
+    }
+    // </editor-fold>
 }

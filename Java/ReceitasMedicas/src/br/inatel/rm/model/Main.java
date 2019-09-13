@@ -1,12 +1,18 @@
 package br.inatel.rm.model;
 
 import br.inatel.rm.view.*;
+import javax.swing.JOptionPane;
 
+/**
+ * Classe principal onde é definido o Look and Feel e chama o menu principal.
+ * @author Samuel
+ * @version 1.0
+ */
 public class Main {
 
     public static void main(String[] args) {
         
-        // Look and feel
+        // Look and feel - Windows
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -14,16 +20,9 @@ public class Main {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro no Look and Feel","Erro!", JOptionPane.ERROR_MESSAGE);
+        } 
         new Menu().setVisible(true);
     }
 
