@@ -5,6 +5,8 @@
  */
 package br.inatel.rm.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Samuel
@@ -29,13 +31,13 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_titulo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbl_titulo2 = new javax.swing.JLabel();
+        lbl_icon3 = new javax.swing.JLabel();
+        lbl_icon2 = new javax.swing.JLabel();
+        lbl_icon1 = new javax.swing.JLabel();
         lbl_fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,10 +47,10 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cartão RFID");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 12, 336, -1));
+        lbl_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_titulo.setText("Cartão RFID");
+        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 12, 336, -1));
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton1.setText("Consultorio");
@@ -57,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 213, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, -1));
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButton2.setText("Farmacia");
@@ -66,22 +68,25 @@ public class Menu extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 213, 120, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("para Receitas Médicas");
-        jLabel3.setToolTipText("");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 340, -1));
+        lbl_titulo2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_titulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_titulo2.setText("para Receitas Médicas");
+        lbl_titulo2.setToolTipText("");
+        jPanel1.add(lbl_titulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 340, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Samuel\\Desktop\\remedio_icon.png")); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 120, 120));
+        lbl_icon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_medicine.png"))); // NOI18N
+        lbl_icon3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(lbl_icon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 120, 120));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Samuel\\Desktop\\heart_icon.png")); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, 120));
+        lbl_icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_health.png"))); // NOI18N
+        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, 120));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Samuel\\Desktop\\card_icon2.png")); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 120));
+        lbl_icon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_cardRFID.png"))); // NOI18N
+        lbl_icon1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(lbl_icon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 120));
 
         lbl_fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/fundo.png"))); // NOI18N
         jPanel1.add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 270));
@@ -110,6 +115,9 @@ public class Menu extends javax.swing.JFrame {
         // Farmacia
         new LeituraCartao().setVisible(true);
         this.dispose();
+        
+        JOptionPane.showMessageDialog(this, "Aproxime um cartão para realizar a leitura.","Aviso", 
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -150,12 +158,12 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_fundo;
+    private javax.swing.JLabel lbl_icon1;
+    private javax.swing.JLabel lbl_icon2;
+    private javax.swing.JLabel lbl_icon3;
+    private javax.swing.JLabel lbl_titulo;
+    private javax.swing.JLabel lbl_titulo2;
     // End of variables declaration//GEN-END:variables
 }
