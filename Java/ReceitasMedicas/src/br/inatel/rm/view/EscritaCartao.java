@@ -2,6 +2,7 @@ package br.inatel.rm.view;
 
 import br.inatel.rm.controller.ArduinoSerial;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 /**
  * Classe que realiza a escrita no cartão RFID (Tela do Consultório).
@@ -51,6 +52,7 @@ public class EscritaCartao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consultorio");
+        setIconImage(new ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

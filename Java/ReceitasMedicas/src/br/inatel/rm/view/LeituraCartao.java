@@ -1,6 +1,7 @@
 package br.inatel.rm.view;
 
 import br.inatel.rm.controller.ArduinoSerial;
+import javax.swing.ImageIcon;
 
 /**
  * Classe que realiza a leitura do cartão RFID (Tela da Farmácia).
@@ -59,6 +60,7 @@ public class LeituraCartao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Drograria");
         setBackground(new java.awt.Color(255, 255, 255));
+        setIconImage(new ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

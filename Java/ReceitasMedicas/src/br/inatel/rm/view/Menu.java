@@ -1,9 +1,12 @@
 package br.inatel.rm.view;
 
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
+
 /**
- * Tela inicial do Software
- * Contém o menu de opções.
- * 
+ * Tela inicial do Software Contém o menu de opções.
+ *
  * @author Samuel
  * @version 1.0
  */
@@ -29,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
+        setIconImage(new ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png")).getImage());
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
