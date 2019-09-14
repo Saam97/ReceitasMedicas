@@ -240,8 +240,8 @@
               <StringArray count="4">
                 <StringItem index="0" value="24h"/>
                 <StringItem index="1" value="12h"/>
-                <StringItem index="2" value="8h"/>
-                <StringItem index="3" value="6h"/>
+                <StringItem index="2" value="08h"/>
+                <StringItem index="3" value="06h"/>
               </StringArray>
             </Property>
             <Property name="selectedIndex" type="int" value="-1"/>

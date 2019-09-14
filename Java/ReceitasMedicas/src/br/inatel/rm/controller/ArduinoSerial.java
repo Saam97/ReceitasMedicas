@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
+import javax.swing.JOptionPane;
 
 /**
  * Classe para comunicação com o Arduino
@@ -98,6 +99,7 @@ public class ArduinoSerial implements SerialPortEventListener {
         try {
             output.write(data.getBytes());
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Dados não enviados ao cartão!", "Falha", JOptionPane.ERROR_MESSAGE);
             System.err.println(e.toString());
         }
     }

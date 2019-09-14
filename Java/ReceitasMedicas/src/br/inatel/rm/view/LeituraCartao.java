@@ -31,6 +31,11 @@ public class LeituraCartao extends javax.swing.JFrame {
      */
     private String id;
 
+    /**
+     * Thread
+     */
+    private Thread t;
+    
     public LeituraCartao() {
         /* Inicializa os componentes da tela */
         initComponents();
@@ -185,7 +190,7 @@ public class LeituraCartao extends javax.swing.JFrame {
      * Thread que vai realizar a leitura dos cartões.
      */
     private void ThreadLeitura() {
-        Thread t = new Thread() {
+        t = new Thread() {
             @Override
             public void run() {
                 /* Inicializa a porta Serial do Arduino */
@@ -216,11 +221,13 @@ public class LeituraCartao extends javax.swing.JFrame {
      */
     public String mascaraDosagem(String dosagem) {
         // Pegando a quantidade de horas
-        String horas = dosagem.substring(1, 2);
+        String horas = dosagem.substring(1, 3);
         // Procurando pela letra "x" para determinar os dias
         int pos = dosagem.indexOf("x") + 1;
         // Pegando o valor dos dias
         String dias = dosagem.substring(pos);
+        
+        //int h = Integer.parseInt(horas);
 
         return "Tomar o remédio de " + horas + " em " + horas + " horas,"
                 + " durante " + dias + " dias.";
@@ -303,6 +310,10 @@ public class LeituraCartao extends javax.swing.JFrame {
     public void voltar() {
         new Menu().setVisible(true);
         this.dispose();
+        // Para a Thread
+        t.stop();
+        // Fecha a comunicação
+        as.close();
     }
     // </editor-fold>
 }

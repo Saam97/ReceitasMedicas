@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 /**
  * Classe que realiza a escrita no cartão RFID (Tela do Consultório).
- *
+ * !nomeDoRemedio# _dosagem# id
  * @author Samuel
  * @version 1.0
  */
@@ -16,6 +16,16 @@ public class EscritaCartao extends javax.swing.JFrame {
      * Variável para comunicação com o Arduino.
      */
     private final ArduinoSerial as = new ArduinoSerial("COM3");
+
+    /**
+     * Thread auxiliar para os dados preenchidos.
+     */
+    private Thread dadosPreenchidos;
+    
+    /**
+     * Thread auxiliar para o numero de vezes ao dia.
+     */
+    private Thread nVezesDia;
 
     public EscritaCartao() {
         /* Inicializa os componentes da tela */
@@ -105,7 +115,7 @@ public class EscritaCartao extends javax.swing.JFrame {
         });
 
         combo_rem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        combo_rem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "24h", "12h", "8h", "6h" }));
+        combo_rem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "24h", "12h", "08h", "06h" }));
         combo_rem.setSelectedIndex(-1);
 
         spn_dias.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -236,30 +246,26 @@ public class EscritaCartao extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     // <editor-fold defaultstate="collapsed" desc=" *** Métodos Criados *** ">
-    
     /**
      * Thread para verificar se os dados foram corretamente preenchidos
      */
     private void threadDadosPreenchidos() {
-        Thread t = new Thread() {
+        dadosPreenchidos = new Thread() {
             @Override
             public void run() {
                 while (true) {
+                    // Verifica se existe um nome para o remédio, valor da dosagem e quantidade de dias
                     if (txt_nomeRemedio.getText() == null
-                            || txt_nomeRemedio.getText().equalsIgnoreCase("")) {
+                            || combo_rem.getSelectedIndex() == -1
+                            || spn_dias.getValue().toString().equals("0")) {
                         btn_salvar.setEnabled(false);
                     } else {
                         btn_salvar.setEnabled(true);
                     }
-                    try {
-                        sleep(100);
-                    } catch (InterruptedException ex) {
-                        System.err.println("Erro na Thread dadosPreenchidos() " + ex.toString());
-                    }
                 }
             }
         };
-        t.start();
+        dadosPreenchidos.start();
     }
 
     /**
@@ -267,7 +273,7 @@ public class EscritaCartao extends javax.swing.JFrame {
      * de vezes ao dia que o paciente deve tomar o remédio.
      */
     private void threadNumeroVezesAoDia() {
-        Thread t = new Thread() {
+        Thread nVezesDia = new Thread() {
             @Override
             public void run() {
                 while (true) {
@@ -295,7 +301,7 @@ public class EscritaCartao extends javax.swing.JFrame {
                 }
             }
         };
-        t.start();
+        nVezesDia.start();
     }
 
     /**
@@ -304,64 +310,69 @@ public class EscritaCartao extends javax.swing.JFrame {
      */
     private void salvarDados() {
         // Variáveis auxiliares
-        String nomeRemedio = null;
-        String dosagem = null;
+        String nomeRemedio;
+        String dosagem;
 
-        // Se o nome do remédio não estiver vazio
-        if (!txt_nomeRemedio.getText().equalsIgnoreCase("")) {
-            // Pega os dados inseridos e concatena com # (Mandatório no Código do Arduino)
-            nomeRemedio = "!" + txt_nomeRemedio.getText() + "#";
-        } else {
-            // Senão exibe uma mensagem de erro e retorna
-            JOptionPane.showMessageDialog(this, "Nome do remédio não pode ser vazio !", "Erro!",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        nomeRemedio = "!" + txt_nomeRemedio.getText() + "#";
+        dosagem = "\n_" + combo_rem.getSelectedItem().toString()
+                + "/" + combo_rem.getSelectedItem().toString() + "x"
+                + spn_dias.getValue().toString() + "#";
 
-        // Se o indice da dosagem estiver no intervalo especificado
-        if (combo_rem.getSelectedIndex() >= 0 && combo_rem.getSelectedIndex() < 4) {
-            // Pega os dados inseridos e concatena com # (Mandatório no Código do Arduino)
-            // E aplica uma máscara para armazenar no cartao
-            dosagem = "_" + combo_rem.getSelectedItem().toString()
-                    + "/" + combo_rem.getSelectedItem().toString() + "x"
-                    + spn_dias.getValue().toString() + "#";
-        } else {
-            // Senão exibe uma mensagem de erro e retorna
-            JOptionPane.showMessageDialog(this, "Selecione uma dosagem !", "Erro!",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        // Envia os dados para o Arduino, com um delay pra não bugar
+        as.send(nomeRemedio);
+        as.sleep(250);
+        as.send(dosagem);
+        as.sleep(250);
+
+        // Exibe uma mensagem de sucesso
+        JOptionPane.showMessageDialog(this, "Dados Salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         
-        // Se o número de dias estiver no intervalo válido
-        if ( Integer.parseInt(spn_dias.getValue().toString())!= 0 ) {
-            // Salva os dados
-            System.out.println("dosagem = " + dosagem);
-            System.out.println("nomeRemedio = " + nomeRemedio);
-
-            // Envia os dados para o Arduino, com um delay pra não bugar
-            as.send(nomeRemedio);
-            as.sleep(250);
-            as.send(dosagem);
-            as.sleep(250);
-
-            // Fecha a comunicação
-            as.close();
-
-            // Exibe uma mensagem de sucesso
-            JOptionPane.showMessageDialog(this, "Dados Salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            // Senão exibe uma mensagem de erro e retorna
-            JOptionPane.showMessageDialog(this, "Selecione uma quantidade de dias Válida !", "Erro!",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        // Sai da janela
+        this.voltar();
     }
-    
+
     /**
      * Volta a tela de menu.
      */
     public void voltar() {
         new Menu().setVisible(true);
         this.dispose();
+        // Encerra as Threads
+        dadosPreenchidos.stop();
+        nVezesDia.stop();
+        // Encerra a Comunicação
+        as.close();
     }
-    // </editor-fold>
+
+    /**
+     * Método para verificar se o cartão está encostado no sensor
+     * @return True se estiver enconstado; False se não estiver enconstado.
+     */
+    public boolean cartaoEncostado() {
+        lbl_sujo.setText(as.read());
+        if ( as.read() != null ) {
+            if (as.read().equals("Card found!")) {
+                return true;
+            } else {
+                return false;
+            } 
+        } else {
+            return false;
+        }
+        
+    }
+    
+    /**
+     * Bloqueia o botão Salvar.
+     */
+    public void bloquearDados() {
+        btn_salvar.setEnabled(false);
+    }
+    
+    /**
+     * Desbloqueia o botão Salvar.
+     */
+    public void liberarDados() {
+        btn_salvar.setEnabled(true);
+    }// </editor-fold>
 }

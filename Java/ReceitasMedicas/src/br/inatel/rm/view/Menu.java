@@ -1,8 +1,11 @@
 package br.inatel.rm.view;
 
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
-
+import javax.swing.border.Border;
 
 /**
  * Tela inicial do Software Contém o menu de opções.
@@ -22,8 +25,8 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lbl_titulo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_consultorio = new javax.swing.JButton();
+        btn_farmacia = new javax.swing.JButton();
         lbl_titulo2 = new javax.swing.JLabel();
         lbl_icon3 = new javax.swing.JLabel();
         lbl_icon2 = new javax.swing.JLabel();
@@ -43,23 +46,24 @@ public class Menu extends javax.swing.JFrame {
         lbl_titulo.setText("Cartão RFID");
         jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 12, 336, -1));
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton1.setText("Consultorio");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_consultorio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn_consultorio.setText("Consultorio");
+        btn_consultorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_consultorioActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, -1));
+        jPanel1.add(btn_consultorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, -1));
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton2.setText("Farmacia");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_farmacia.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn_farmacia.setText("Farmacia");
+        btn_farmacia.setToolTipText("");
+        btn_farmacia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_farmaciaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
+        jPanel1.add(btn_farmacia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
 
         lbl_titulo2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbl_titulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -73,11 +77,20 @@ public class Menu extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_icon3MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_icon3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_icon3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl_icon3MousePressed(evt);
+            }
         });
         jPanel1.add(lbl_icon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 120, 120));
 
-        lbl_icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_health.png"))); // NOI18N
-        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, 120));
+        lbl_icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_drugstore.png"))); // NOI18N
+        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 120, 120));
 
         lbl_icon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_cardRFID.png"))); // NOI18N
@@ -85,6 +98,15 @@ public class Menu extends javax.swing.JFrame {
         lbl_icon1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_icon1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_icon1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_icon1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl_icon1MousePressed(evt);
             }
         });
         jPanel1.add(lbl_icon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 120));
@@ -106,25 +128,55 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Consultorio - Escrever dados
-        telaEscrita();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void lbl_icon1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon1MousePressed
+        // Mouse Pressionado
+        lbl_icon1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+    }//GEN-LAST:event_lbl_icon1MousePressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Farmacia - Ler dados
-        telaLeitura();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void lbl_icon1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon1MouseExited
+        // Mouse saiu do negocio
+        lbl_icon1.setBorder(null);
+    }//GEN-LAST:event_lbl_icon1MouseExited
+
+    private void lbl_icon1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon1MouseEntered
+        // Mouse em cima do negocio
+        lbl_icon1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    }//GEN-LAST:event_lbl_icon1MouseEntered
 
     private void lbl_icon1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon1MouseClicked
         // Mouse click label cartão
         telaEscrita();
     }//GEN-LAST:event_lbl_icon1MouseClicked
 
+    private void lbl_icon3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon3MousePressed
+        // Mouse pressionado
+        lbl_icon3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+    }//GEN-LAST:event_lbl_icon3MousePressed
+
+    private void lbl_icon3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon3MouseExited
+        // Mouse saiu
+        lbl_icon3.setBorder(null);
+    }//GEN-LAST:event_lbl_icon3MouseExited
+
+    private void lbl_icon3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon3MouseEntered
+        // Mouse dentro do label
+        lbl_icon3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    }//GEN-LAST:event_lbl_icon3MouseEntered
+
     private void lbl_icon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_icon3MouseClicked
         // Mouse click label remédio
         telaLeitura();
     }//GEN-LAST:event_lbl_icon3MouseClicked
+
+    private void btn_farmaciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_farmaciaActionPerformed
+        // Farmacia - Ler dados
+        telaLeitura();
+    }//GEN-LAST:event_btn_farmaciaActionPerformed
+
+    private void btn_consultorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultorioActionPerformed
+        // Consultorio - Escrever dados
+        telaEscrita();
+    }//GEN-LAST:event_btn_consultorioActionPerformed
 
     public static void main(String args[]) {
 
@@ -137,8 +189,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_consultorio;
+    private javax.swing.JButton btn_farmacia;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_fundo;
     private javax.swing.JLabel lbl_icon1;
