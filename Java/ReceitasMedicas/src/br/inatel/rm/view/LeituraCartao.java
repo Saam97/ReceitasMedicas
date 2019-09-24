@@ -1,6 +1,7 @@
 package br.inatel.rm.view;
 
 import br.inatel.rm.controller.ArduinoSerial;
+import br.inatel.rm.model.Main;
 import javax.swing.ImageIcon;
 
 /**
@@ -14,7 +15,7 @@ public class LeituraCartao extends javax.swing.JFrame {
     /**
      * Variável para comunicação com o Arduino.
      */
-    private final ArduinoSerial as = new ArduinoSerial("COM3");
+    private final ArduinoSerial as = new ArduinoSerial(Main.PORTA_LEITURA);
     
     /**
      * Dosagem do remédio.
@@ -34,7 +35,7 @@ public class LeituraCartao extends javax.swing.JFrame {
     /**
      * Thread
      */
-    private Thread t;
+    private Thread leitura;
     
     public LeituraCartao() {
         /* Inicializa os componentes da tela */
@@ -190,7 +191,7 @@ public class LeituraCartao extends javax.swing.JFrame {
      * Thread que vai realizar a leitura dos cartões.
      */
     private void ThreadLeitura() {
-        t = new Thread() {
+        leitura = new Thread() {
             @Override
             public void run() {
                 /* Inicializa a porta Serial do Arduino */
@@ -210,7 +211,7 @@ public class LeituraCartao extends javax.swing.JFrame {
             }
         };
         /* Inicia a Thread */
-        t.start();
+        leitura.start();
     }
 
     /**
@@ -311,7 +312,7 @@ public class LeituraCartao extends javax.swing.JFrame {
         new Menu().setVisible(true);
         this.dispose();
         // Para a Thread
-        t.stop();
+        leitura.stop();
         // Fecha a comunicação
         as.close();
     }

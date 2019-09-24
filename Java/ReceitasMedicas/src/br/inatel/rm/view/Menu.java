@@ -1,11 +1,6 @@
 package br.inatel.rm.view;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Toolkit;
 import javax.swing.ImageIcon;
-import javax.swing.border.Border;
 
 /**
  * Tela inicial do Software Contém o menu de opções.

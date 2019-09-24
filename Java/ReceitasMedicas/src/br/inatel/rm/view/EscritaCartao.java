@@ -1,12 +1,14 @@
 package br.inatel.rm.view;
 
 import br.inatel.rm.controller.ArduinoSerial;
+import br.inatel.rm.model.Main;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 /**
  * Classe que realiza a escrita no cartão RFID (Tela do Consultório).
  * !nomeDoRemedio# _dosagem# id
+ *
  * @author Samuel
  * @version 1.0
  */
@@ -15,13 +17,13 @@ public class EscritaCartao extends javax.swing.JFrame {
     /**
      * Variável para comunicação com o Arduino.
      */
-    private final ArduinoSerial as = new ArduinoSerial("COM3");
+    private final ArduinoSerial as = new ArduinoSerial(Main.PORTA_ESCRITA);
 
     /**
      * Thread auxiliar para os dados preenchidos.
      */
     private Thread dadosPreenchidos;
-    
+
     /**
      * Thread auxiliar para o numero de vezes ao dia.
      */
@@ -119,7 +121,7 @@ public class EscritaCartao extends javax.swing.JFrame {
         combo_rem.setSelectedIndex(-1);
 
         spn_dias.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        spn_dias.setModel(new javax.swing.SpinnerNumberModel(0, 0, 7, 1));
+        spn_dias.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
         spn_dias.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -273,7 +275,7 @@ public class EscritaCartao extends javax.swing.JFrame {
      * de vezes ao dia que o paciente deve tomar o remédio.
      */
     private void threadNumeroVezesAoDia() {
-        Thread nVezesDia = new Thread() {
+        nVezesDia = new Thread() {
             @Override
             public void run() {
                 while (true) {
@@ -326,7 +328,7 @@ public class EscritaCartao extends javax.swing.JFrame {
 
         // Exibe uma mensagem de sucesso
         JOptionPane.showMessageDialog(this, "Dados Salvos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        
+
         // Sai da janela
         this.voltar();
     }
@@ -346,29 +348,30 @@ public class EscritaCartao extends javax.swing.JFrame {
 
     /**
      * Método para verificar se o cartão está encostado no sensor
+     *
      * @return True se estiver enconstado; False se não estiver enconstado.
      */
     public boolean cartaoEncostado() {
         lbl_sujo.setText(as.read());
-        if ( as.read() != null ) {
+        if (as.read() != null) {
             if (as.read().equals("Card found!")) {
                 return true;
             } else {
                 return false;
-            } 
+            }
         } else {
             return false;
         }
-        
+
     }
-    
+
     /**
      * Bloqueia o botão Salvar.
      */
     public void bloquearDados() {
         btn_salvar.setEnabled(false);
     }
-    
+
     /**
      * Desbloqueia o botão Salvar.
      */

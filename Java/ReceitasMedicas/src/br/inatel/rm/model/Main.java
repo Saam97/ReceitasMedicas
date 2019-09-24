@@ -25,5 +25,9 @@ public class Main {
         } 
         new Menu().setVisible(true);
     }
-
+    
+    // COM6: Read - Farmácia
+    public static final String PORTA_LEITURA = "COM6";
+    // COM3: Write - Consultório
+    public static final String PORTA_ESCRITA = "COM3";
 }
