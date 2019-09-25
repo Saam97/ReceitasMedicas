@@ -65,6 +65,7 @@ public class EscritaCartao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consultorio");
         setIconImage(new ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png")).getImage());
+        setMinimumSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,16 +74,17 @@ public class EscritaCartao extends javax.swing.JFrame {
 
         lbl_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_clinic.png"))); // NOI18N
-        jPanel1.add(lbl_icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 60, 60));
+        jPanel1.add(lbl_icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 60, 60));
 
-        lbl_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_titulo.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_titulo.setText("Consultório");
-        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 8, 620, 60));
+        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 8, 970, 60));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, 620, 70));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, 980, 70));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Cartão", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Cartão", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 36))); // NOI18N
+        jPanel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jPanel2.setOpaque(false);
 
         lbl_id.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -91,7 +93,7 @@ public class EscritaCartao extends javax.swing.JFrame {
 
         lbl_sujo.setText(" ");
 
-        btn_voltar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn_voltar.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         btn_voltar.setText("Voltar");
         btn_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,8 +101,8 @@ public class EscritaCartao extends javax.swing.JFrame {
             }
         });
 
-        txt_nomeRemedio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txt_nomeRemedio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Remédio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        txt_nomeRemedio.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        txt_nomeRemedio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do Remédio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         txt_nomeRemedio.setOpaque(false);
         txt_nomeRemedio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +110,7 @@ public class EscritaCartao extends javax.swing.JFrame {
             }
         });
 
-        btn_salvar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btn_salvar.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         btn_salvar.setText("Salvar");
         btn_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,24 +118,24 @@ public class EscritaCartao extends javax.swing.JFrame {
             }
         });
 
-        combo_rem.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        combo_rem.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         combo_rem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "24h", "12h", "08h", "06h" }));
         combo_rem.setSelectedIndex(-1);
 
-        spn_dias.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        spn_dias.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         spn_dias.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
         spn_dias.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel2.setText("Tomar o remédio a cada");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel3.setText("Durante");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel4.setText("dias");
 
-        lbl_qtdDias.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        lbl_qtdDias.setFont(new java.awt.Font("Arial", 2, 36)); // NOI18N
         lbl_qtdDias.setText(" ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -142,7 +144,6 @@ public class EscritaCartao extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_nomeRemedio, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(4, 4, 4)
@@ -157,15 +158,20 @@ public class EscritaCartao extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(lbl_id)
-                        .addGap(393, 393, 393)
-                        .addComponent(btn_voltar)
-                        .addGap(22, 22, 22)
-                        .addComponent(btn_salvar))
+                        .addComponent(lbl_id))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(593, 593, 593)
                         .addComponent(lbl_sujo, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                .addGap(106, 370, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_nomeRemedio)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_voltar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_salvar)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,20 +195,20 @@ public class EscritaCartao extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))))
                 .addGap(95, 95, 95)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_id)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_voltar)
-                            .addComponent(btn_salvar))))
-                .addComponent(lbl_sujo))
+                .addComponent(lbl_id)
+                .addGap(12, 12, 12)
+                .addComponent(lbl_sujo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_salvar)
+                    .addComponent(btn_voltar))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 620, 320));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 980, 500));
 
         lbl_fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/fundo.png"))); // NOI18N
-        getContentPane().add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 420));
+        getContentPane().add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

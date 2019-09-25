@@ -8,9 +8,9 @@ import javax.swing.ImageIcon;
  * @author Samuel
  * @version 1.0
  */
-public class Menu extends javax.swing.JFrame {
+public class OldMenu extends javax.swing.JFrame {
 
-    public Menu() {
+    public OldMenu() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -29,30 +29,28 @@ public class Menu extends javax.swing.JFrame {
         lbl_fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cartão RFID Para Receitas Médicas");
+        setTitle("Menu");
         setIconImage(new ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png")).getImage());
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_titulo.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        lbl_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbl_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_titulo.setText("Cartão RFID");
-        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 980, -1));
+        jPanel1.add(lbl_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 12, 336, -1));
 
-        btn_consultorio.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        btn_consultorio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btn_consultorio.setText("Consultorio");
         btn_consultorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_consultorioActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_consultorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 250, -1));
+        jPanel1.add(btn_consultorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, -1));
 
-        btn_farmacia.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        btn_farmacia.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         btn_farmacia.setText("Farmacia");
         btn_farmacia.setToolTipText("");
         btn_farmacia.addActionListener(new java.awt.event.ActionListener() {
@@ -60,15 +58,15 @@ public class Menu extends javax.swing.JFrame {
                 btn_farmaciaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_farmacia, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 250, -1));
+        jPanel1.add(btn_farmacia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
 
-        lbl_titulo2.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        lbl_titulo2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbl_titulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_titulo2.setText("para Receitas Médicas");
         lbl_titulo2.setToolTipText("");
-        jPanel1.add(lbl_titulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 980, -1));
+        jPanel1.add(lbl_titulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 340, -1));
 
-        lbl_icon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_medicine_250.png"))); // NOI18N
+        lbl_icon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_medicine.png"))); // NOI18N
         lbl_icon3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_icon3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -84,13 +82,13 @@ public class Menu extends javax.swing.JFrame {
                 lbl_icon3MousePressed(evt);
             }
         });
-        jPanel1.add(lbl_icon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 250, 250));
+        jPanel1.add(lbl_icon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 120, 120));
 
-        lbl_icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png"))); // NOI18N
-        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
+        lbl_icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_drugstore.png"))); // NOI18N
+        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 120, 120));
 
         lbl_icon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_cardRFID_250.png"))); // NOI18N
+        lbl_icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_cardRFID.png"))); // NOI18N
         lbl_icon1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_icon1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -106,10 +104,10 @@ public class Menu extends javax.swing.JFrame {
                 lbl_icon1MousePressed(evt);
             }
         });
-        jPanel1.add(lbl_icon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        jPanel1.add(lbl_icon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 120));
 
         lbl_fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/fundo.png"))); // NOI18N
-        jPanel1.add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
+        jPanel1.add(lbl_fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new OldMenu().setVisible(true);
             }
         });
     }
