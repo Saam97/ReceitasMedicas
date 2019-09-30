@@ -68,7 +68,6 @@ public class LeituraCartao extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(new ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1000, 600));
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -100,7 +99,7 @@ public class LeituraCartao extends javax.swing.JFrame {
         btn_ok.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         btn_ok.setText("OK");
 
-        lbl_id.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_id.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         lbl_id.setText(" ");
         lbl_id.setBorder(javax.swing.BorderFactory.createTitledBorder("ID do Cartão"));
 
@@ -142,7 +141,7 @@ public class LeituraCartao extends javax.swing.JFrame {
                 .addComponent(lbl_dos, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_sujo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ok)
                     .addComponent(lbl_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
