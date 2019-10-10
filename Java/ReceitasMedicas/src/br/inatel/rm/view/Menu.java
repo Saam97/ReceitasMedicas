@@ -87,7 +87,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(lbl_icon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 250, 250));
 
         lbl_icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_app.png"))); // NOI18N
-        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
+        jPanel1.add(lbl_icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, -1, -1));
 
         lbl_icon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/inatel/rm/img/icon_cardRFID_250.png"))); // NOI18N
